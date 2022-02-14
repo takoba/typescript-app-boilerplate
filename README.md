@@ -26,6 +26,7 @@ git remote add origin https://github.com/__YOUR_ACCOUNT__/__YOUR_APP__.git
 ### 3. Start servers
 ```sh
 yarn build && yarn start
+```
 
 
 ## How to Deploy
