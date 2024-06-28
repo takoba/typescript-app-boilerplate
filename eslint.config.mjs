@@ -4,6 +4,7 @@ import { FlatCompat } from '@eslint/eslintrc'
 import js from '@eslint/js'
 import typescriptESLint from '@typescript-eslint/eslint-plugin'
 import typescriptESLintParser from '@typescript-eslint/parser'
+import jestPlugin from 'eslint-plugin-jest'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
 
@@ -68,6 +69,21 @@ export default [
         ...globals.browser,
         ...globals.node,
       },
+    },
+  },
+  {
+    files: ['test/**/*.ts', 'jest.config.ts'],
+
+    ...jestPlugin.configs['flat/recommended'],
+
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.jest,
+      },
+    },
+    rules: {
+      ...jestPlugin.configs['flat/recommended'].rules,
     },
   },
   {
