@@ -1,46 +1,54 @@
 # @takoba/typescript-app-boilerplate
+
 a boilerplate for TypeScript app.
 
 ![GitHub](https://img.shields.io:/github/license/takoba/typescript-app-boilerplate)
 
+## Usage
 
-## Running Locally
+### 1. Uses [tiged](https://www.npmjs.com/package/tiged)
 
-### 1. Setup your local project
 ```sh
-# Clone this project onto your machine
-git clone https://github.com/takoba/typescript-app-boilerplate.git path/to/__YOUR_APP__
-# Change into the project
-cd path/to/__YOUR_APP__
-# Install the dependencies
-yarn install
+# clone repo & move to cloned dir
+npx tiged takoba/typescript-app-boilerplate [dst]
+cd [dst]
 
-# setup remote git repository 
-git remote remove origin
-git remote add origin https://github.com/__YOUR_ACCOUNT__/__YOUR_APP__.git
+# setup git repository
+git init
+git add . && git commit -m ':sparkles: Initial commit'
+git remote add origin [url]
+git push origin main -u
+
+# generate package-lock.json & commit to repo
+npm install
+git add .
+git commit -m ':pushpin: Add package-lock.json'
+git push
 ```
 
-### 2. Create your app
-- entrypoint is src/index.ts
+### 2. Uses [create-typescript-app-base](https://www.npmjs.com/package/create-typescript-app-base)
 
-### 3. Start servers
 ```sh
-yarn build && yarn start
+# clone repo & move to cloned dir
+npx create-typescript-app-base myapp
+cd ./myapp
+
+# setup git repository
+git init
+git add . && git commit -m ':sparkles: Initial commit'
+git remote add origin [url]
+git push origin main -u
+
+# generate package-lock.json & commit to repo
+npm install
+git add .
+git commit -m ':pushpin: Add package-lock.json'
+git push
 ```
-
-
-## How to Deploy
-
-### Deploy to heroku.com
-
-Click below "Deploy to Heroku" button, then show a form to create Heroku App.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
 
 ## Contributing
+
 Found a bug or have a question about this project? We'd love to hear from you!
 
-1. Browse to https://github.com/takoba/typescript-app-boilerplate/issues
+1. Browse to <https://github.com/takoba/typescript-app-boilerplate/issues>
 2. If there are no duplicates, create a new issue
-
