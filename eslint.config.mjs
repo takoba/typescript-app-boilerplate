@@ -4,6 +4,7 @@ import { FlatCompat } from '@eslint/eslintrc'
 import js from '@eslint/js'
 import stylisticPlugin from '@stylistic/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
+import vitestPlugin from '@vitest/eslint-plugin'
 import prettierPluginRecommended from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
 
@@ -66,6 +67,20 @@ export default [
         ...globals.browser,
         ...globals.node,
       },
+    },
+  },
+  {
+    files: ['tests/**/*.?(c|m){ts,tsx}', 'vitest.config.ts'],
+
+    ...vitestPlugin.configs.recommended,
+
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+    rules: {
+      ...vitestPlugin.rules.recommended,
     },
   },
   {

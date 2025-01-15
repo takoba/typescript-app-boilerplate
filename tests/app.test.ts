@@ -1,10 +1,10 @@
-import { describe, expect, it } from '@jest/globals'
+import { describe, expect, it, vi } from 'vitest'
 import App from '../src/app'
 
 describe('export const App', () => {
   it('return log when call `start()`', () => {
     // arrange
-    global.console.log = jest.fn()
+    global.console.log = vi.fn()
 
     // act
     const app = App()

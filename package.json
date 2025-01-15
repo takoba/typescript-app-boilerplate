@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "tsc --outDir dist/",
-    "test": "jest",
+    "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
@@ -23,6 +23,7 @@
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.14.9",
     "@typescript-eslint/parser": "^8.20.0",
+    "@vitest/eslint-plugin": "^1.1.25",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.7.0",
@@ -31,6 +32,7 @@
     "globals": "^15.6.0",
     "prettier": "^3.3.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.2",
+    "vitest": "^2.1.8"
   }
 }
