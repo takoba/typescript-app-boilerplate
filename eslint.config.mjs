@@ -2,10 +2,10 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { FlatCompat } from '@eslint/eslintrc'
 import js from '@eslint/js'
-import typescriptESLint from '@typescript-eslint/eslint-plugin'
-import typescriptESLintParser from '@typescript-eslint/parser'
+import tsPlugin from '@typescript-eslint/eslint-plugin'
+import tsParser from '@typescript-eslint/parser'
 import jestPlugin from 'eslint-plugin-jest'
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import prettierPluginRecommended from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
 
 // @see https://github.com/eslint/eslintrc?tab=readme-ov-file#usage-esm
@@ -20,7 +20,7 @@ const compat = new FlatCompat({
 /** @type {import("eslint").Linter.FlatConfig[]} */
 export default [
   js.configs.recommended,
-  eslintPluginPrettierRecommended,
+  prettierPluginRecommended,
   ...compat.extends(
     'plugin:import/errors',
     'plugin:import/typescript',
@@ -29,14 +29,14 @@ export default [
   ...compat.plugins('import'),
   {
     languageOptions: {
-      parser: typescriptESLintParser,
+      parser: tsParser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
     },
     plugins: {
-      typescriptESLint,
+      tsPlugin,
     },
     rules: {
       '@typescript-eslint/explicit-module-boundary-types': 'off',
