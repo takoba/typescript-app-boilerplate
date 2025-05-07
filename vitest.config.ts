@@ -4,4 +4,10 @@ export default defineConfig({
   test: {
     include: ['tests/**/*.test.{ts,mts,cts}'],
   },
+
+  optimizeDeps: {
+    esbuildOptions: {
+      tsconfig: './tests/tsconfig.json',
+    }
+  },
 })
