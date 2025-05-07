@@ -66,6 +66,16 @@ export default tseslintConfigFn([
         ...globals.node,
       },
     },
+    settings: {
+      'import/resolver': {
+        alias: {
+          map: [
+            ['~', './src'],
+          ],
+          extensions: ['.ts', '.mts'],
+        },
+      },
+    }
   },
 
   {
@@ -81,6 +91,16 @@ export default tseslintConfigFn([
     rules: {
       ...vitestPlugin.configs.recommended.rules,
     },
+    settings: {
+      'import/resolver': {
+        alias: {
+          map: [
+            ['~', './src'],
+          ],
+          extensions: ['.ts', '.mts'],
+        },
+      },
+    }
   },
 
   {

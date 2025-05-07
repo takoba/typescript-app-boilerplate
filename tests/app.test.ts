@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import App from '../src/app'
+import App from '~/app'
 
 describe('export const App', () => {
   it('return log when call `start()`', () => {
