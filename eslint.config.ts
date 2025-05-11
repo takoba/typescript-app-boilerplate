@@ -1,30 +1,21 @@
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
 import js from '@eslint/js'
 import stylisticPlugin from '@stylistic/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
 import vitestPlugin from '@vitest/eslint-plugin'
-import prettierPluginRecommended from 'eslint-plugin-prettier/recommended'
+import importPlugin from 'eslint-plugin-import'
 import globals from 'globals'
+import { config as tseslintConfigFn, configs as tseslintConfigs } from 'typescript-eslint'
 
-// @see https://github.com/eslint/eslintrc?tab=readme-ov-file#usage-esm
-// mimic CommonJS variables -- not needed if using CommonJS
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  resolvePluginsRelativeTo: __dirname,
-})
+export default tseslintConfigFn([
+  { ignores: ['dist'] },
 
-export default [
-  {
-    ignores: ['dist/**/*'],
-  },
   js.configs.recommended,
-  prettierPluginRecommended,
-  ...compat.extends('plugin:import/errors', 'plugin:import/typescript'),
-  ...compat.plugins('import'),
+  tseslintConfigs.recommended,
+
+  importPlugin.flatConfigs.recommended,
+  importPlugin.flatConfigs.typescript,
+  importPlugin.flatConfigs.errors,
+
   {
     languageOptions: {
       parser: tsParser,
@@ -38,11 +29,17 @@ export default [
     },
     rules: {
       '@stylistic/explicit-module-boundary-types': 'off',
+      '@stylistic/indent': ['error', 2],
+      '@stylistic/max-len': ['error', {
+        code: 100,
+      }],
       '@stylistic/no-empty-function': 'off',
       '@stylistic/no-empty-interface': 'off',
       '@stylistic/no-trailing-spaces': 'error',
+      '@stylistic/quotes': ['error', 'single'],
       'no-unused-vars': 'off',
       'sort-imports': 'off',
+      'import/default': 'off',
       'import/no-unresolved': 'error',
       'import/order': [
         'error',
@@ -59,6 +56,7 @@ export default [
       },
     },
   },
+
   {
     files: ['src/**/*.{ts,tsx}'],
 
@@ -68,9 +66,20 @@ export default [
         ...globals.node,
       },
     },
+    settings: {
+      'import/resolver': {
+        alias: {
+          map: [
+            ['~', './src'],
+          ],
+          extensions: ['.ts', '.mts'],
+        },
+      },
+    }
   },
+
   {
-    files: ['tests/**/*.?(c|m){ts,tsx}', 'vitest.config.ts'],
+    files: ['tests/**/*.?(c|m){ts,tsx}'],
 
     ...vitestPlugin.configs.recommended,
 
@@ -80,11 +89,22 @@ export default [
       },
     },
     rules: {
-      ...vitestPlugin.rules.recommended,
+      ...vitestPlugin.configs.recommended.rules,
     },
+    settings: {
+      'import/resolver': {
+        alias: {
+          map: [
+            ['~', './src'],
+          ],
+          extensions: ['.ts', '.mts'],
+        },
+      },
+    }
   },
+
   {
-    files: ['eslint.config.mjs'],
+    files: ['eslint.config.ts', 'vitest.config.ts'],
 
     languageOptions: {
       globals: {
@@ -92,4 +112,4 @@ export default [
       },
     },
   },
-]
+])
